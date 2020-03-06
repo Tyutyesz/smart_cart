@@ -16,6 +16,16 @@ export class OrdersComponent implements OnInit {
   private order: Order;
   private orders: Array<Order>;
   private products: Array<Product>;
+  displayedColumns: string[] = ['name', 'price'];
+  private statusKeys = {
+    'WfPU': 'Waiting for Pick Up',
+    'PU': 'Picked Up',
+    'ID': 'In Depot',
+    'OD': 'On Delivery',
+    'DD': 'Delivered'
+  };
+  private status: string;
+  private summary: number;
   constructor(private dataService:DataService, private loginService:LoginService) { }
 
   ngOnInit() {
@@ -24,17 +34,23 @@ export class OrdersComponent implements OnInit {
       this.orders = orders;
     });
   }
+  getSummary(price) {
+    console.log(price);
+    this.summary += parseInt(price.replace(' ',''), 10);
+  }
   formatPrice(product) {
     return product.price.replace(' Ft-tól', '');
   }
   getUserProduct() {
     this.userProducts = [];
+    this.summary = 0;
     let product;
     this.order.items.forEach((item) => {
       for (let i = 0; i < this.products.length; i +=1 ) {
         if (this.products[i].id === item) {
           product = this.products[i];
           product.price = this.formatPrice(product);
+          this.getSummary(product.price);
           this.userProducts.push(this.products[i])
         }
       }
@@ -48,6 +64,7 @@ export class OrdersComponent implements OnInit {
   }
   getOrder(selectedOrder) {
     this.order = this.orders.find(order => order.id === selectedOrder);
+    this.status = this.statusKeys[this.order.status];
     this.getProducts();
   }
   logOut() {

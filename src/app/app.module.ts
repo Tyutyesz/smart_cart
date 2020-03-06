@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { OrdersComponent } from './orders/orders.component';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatListModule,
     MatIconModule,
+    MatTableModule,
     ReactiveFormsModule,
     FormsModule
   ],

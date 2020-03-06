@@ -15,7 +15,7 @@
     <div class="col-md text-center">
       <ul class="list-unstyled">
         <li class="text-center mt-3" *ngFor="let order of user.orders">
-          <button mat-raised-button (click)="getOrder(order)">
+          <button mat-raised-button color="primary" (click)="getOrder(order)">
             {{order}}
           </button>
         </li>
@@ -27,7 +27,38 @@
       <h4>You don't have any orders</h4>
     </div>
   </div>
+</div>
+<div class="container" *ngIf="userProducts.length > 0">
   <div class="row mt-4">
-
+    <div class="col">
+      <table mat-table [dataSource]="userProducts" class="w-100">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Product Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Product Price</th>
+          <td mat-cell *matCellDef="let element"> {{element.price}} Ft </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col">
+      <mat-card>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md text-md-left text-center">
+              <h4 class="mb-0"><strong>Status:</strong> {{status}}</h4>
+            </div>
+            <div class="col-md text-md-right text-center">
+              <h4 class="mb-0"><strong>Price:</strong> {{summary}} Ft</h4>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </div>

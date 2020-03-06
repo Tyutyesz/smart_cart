@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+  <span>Orders</span>
+  <span class="fill-gap"></span>
+  <button mat-mini-fab title="logout" (click)="logOut()">
+    <mat-icon>input</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="container">
+  <div class="row mt-2">
+    <div class="col text-center">
+      <h2>My orders</h2>
+    </div>
+  </div>
+  <div class="row mt-4" *ngIf="user.orders.length > 0">
+    <div class="col-md text-center">
+      <ul class="list-unstyled">
+        <li class="text-center mt-3" *ngFor="let order of user.orders">
+          <button mat-raised-button (click)="getOrder(order)">
+            {{order}}
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row mt-4" *ngIf="user.orders.length === 0">
+    <div class="col">
+      <h4>You don't have any orders</h4>
+    </div>
+  </div>
+  <div class="row mt-4">
+
+  </div>
+</div>
